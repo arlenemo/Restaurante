@@ -4,11 +4,41 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="Editar">
   <ion-content class="padding">
-    <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
-    <p>
-      {{chat.lastText}}
-    </p>
+    
+    <form name="agregarForm" novalidate>
+    <div class="list">
+    <label class="item item-input">
+      <span class="input-label">Nombre</span>
+      <input type="text" name="nombre"  ng-model="persona[0].nombre" required>
+   </label>
+   
+   <label class="item item-input">
+      <span class="input-label">Descripcion</span>
+      <input type="text" name="descripcion"  ng-model="persona[0].descripcion" required>
+   </label>
+   
+   <label class="item item-input">
+      <span class="input-label">Precio</span>
+      <input type="tel" name="precio"   ng-model="persona[0].precio" required>
+   </label>
+   
+   </div>
+   
+   <div class="padding">
+        <p ng-show="agregarForm.nombre.$error.required">Escriba el nombre</p>
+        <p ng-show="agregarForm.descripcion.$error.required">Escriba la descripcion</p>
+        <p ng-show="agregarForm.precio.$error.required">Escriba el precio</p>
+        <p>{{ statusMessage }}</p>
+    </div>
+   
+    <input type="hidden" name="id" ng-model="persona[0].id">
+   <button type="button" class="button icon-left ion-compose button-positive" ng-disabled="agregarForm.$invalid" ng-click="guardar(persona[0])">
+      Guardar
+   </button>
+   
+   </form>
+    
   </ion-content>
 </ion-view>

@@ -1,3 +1,4 @@
+var db;
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -5,9 +6,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
+
+.run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,9 +20,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
+     if(window.cordova)
+     {
+         db=$cordovaSQLite.openDB("tarea3_restaurante.db");
+     } else{
+         db=window.openDatabase("tarea3_restaurante.db", "1", "Aplicacion", -1);
+     }
+     
+      /*db = $cordovaSQLite.openDB("tarea3_restaurante.db");*/
+        $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS restaurante (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(255), descripcion varchar(255), precio varchar(255))');
+
   });
+  
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
