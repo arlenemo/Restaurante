@@ -24,9 +24,9 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     }
      if(window.cordova)
      {
-         db=$cordovaSQLite.openDB("tarea3_restaurante.db");
+         db=$cordovaSQLite.openDB("restaurante.db");
      } else{
-         db=window.openDatabase("tarea3_restaurante.db", "1", "Aplicacion", -1);
+         db=window.openDatabase("restaurante.db", "1", "Aplicacion", -1);
      }
      
       /*db = $cordovaSQLite.openDB("tarea3_restaurante.db");*/
